@@ -81,7 +81,7 @@ esac
 # comment out the shebangs so the compilers don't complain
 for f in $comp; do
     if [ -f "$f" ]; then
-        sed -i '1!b;s/^#!/\/\/#!/' "$f"
+        sedi '1s,^#!,//#!,' "$f"
     fi
 done
 
@@ -92,7 +92,7 @@ cleanup() {
     # uncomment the shebangs
     for f in $comp; do
         if [ -f "$f" ]; then
-            sed -i '1!b;s/^\/\/#!/#!/' "$f"
+            sedi '1s,^//#!,#!,' "$f"
         fi
     done
 
