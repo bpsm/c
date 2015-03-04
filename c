@@ -65,6 +65,19 @@ if [ ! -t 0 ]; then
     cat <&0 >$stdin # useless use of cat?
 fi
 
+case $(uname) in
+    Darwin)
+        function sedi() {
+            sed -i '' -e "$1" "$2"
+        }
+        ;;
+    *)
+        function sedi() {
+            sed -i -e "$1" "$2"
+        }
+        ;;
+esac
+
 # comment out the shebangs so the compilers don't complain
 for f in $comp; do
     if [ -f "$f" ]; then
